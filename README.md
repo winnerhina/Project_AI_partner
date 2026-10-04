@@ -85,7 +85,7 @@ streamlit run main.py
 
 ## 📝 说明
 
-- 会话记录以 JSON 格式保存在 `sessions/` 目录，**不会提交到仓库**（已被 `.gitignore` 忽略）
+- 会话记录以 JSON 格式保存在 `sessions/` 目录
 - 本项目仅用于学习和娱乐，请遵守 DeepSeek 平台的使用规范
 
 ## 📄 许可证
