@@ -133,13 +133,14 @@ if input_text:
         )
 
         # 输出大模型返回的结果（流失输出）
-        response_message = st.empty()  # 创建空容器用于显示大模型返回的结果（流失输出）的实时内容
-        content = ""
-        for chunk in response:
-            # 先判断chunk.choices非空（个别数据块可能没有choices内容），防止IndexError
-            if chunk.choices and chunk.choices[0].delta.content is not None:
-                content += chunk.choices[0].delta.content
-                response_message.chat_message("assistant").write(content)
+        with st.chat_message("assistant"):
+            response_message = st.empty()  # 占位符：放在气泡内，用于实时更新气泡内容
+            content = ""
+            for chunk in response:
+                # 先判断chunk.choices非空（个别数据块可能没有choices内容），防止IndexError
+                if chunk.choices and chunk.choices[0].delta.content is not None:
+                    content += chunk.choices[0].delta.content
+                    response_message.write(content)
         # 记录大模型返回的结果
         st.session_state.messages.append({"role": "assistant", "content": content})
     except Exception as e:
